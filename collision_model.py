@@ -14,5 +14,3 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
     )
     velocity = np.cumsum(steps)
     return velocity
-
-
