@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy
 import os
 
-
 def ensure_dir(path):
     os.makedirs(path, exist_ok=True)
 
@@ -35,6 +34,3 @@ def plot_variance_comparison(t_emp, empirical_var, t_rom, predicted_var, savepat
         print(f"Saved {savepath}")
     plt.show()
     plt.close()
-
-
-
