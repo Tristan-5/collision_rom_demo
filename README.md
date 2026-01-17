@@ -4,5 +4,4 @@ This repository contains a lightweight Python demonstration of a collision-stati
 
 The goal is not to replace CFD, but to show how fast, low-dimensional statistical models can capture key fluctuation behavior relevant to prediction, design, and control.
 
-
-
+See https://doi.org/10.48550/arXiv.2601.03279 or https://doi.org/10.2139/ssrn.5624350 for more information on the theory.
