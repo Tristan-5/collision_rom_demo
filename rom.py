@@ -15,6 +15,5 @@ def rom_prediction(N, mean_v, var_v):
     Returns t (1..N) and predicted variance array.
     """
     t = np.arange(1, N + 1)
-
     predicted_variance = var_v * (t / t[-1])
     return t, predicted_variance
