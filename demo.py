@@ -17,14 +17,10 @@ def main(N=5000, step_size=1.0, p_forward=0.55, seed=None, savefig=True):
     else:
         plot_velocity(velocity, savepath=None)
 
-
-
     t_emp, empirical_var = empirical_variance_series(velocity, start=10)
 
     mean_v, var_v = compute_rom_parameters(velocity)
     t_rom, predicted_var = rom_prediction(len(t_emp), mean_v, var_v)
-
-
 
     if savefig:
         plot_variance_comparison(t_emp, empirical_var, t_emp, predicted_var, savepath="figures/variance_compare.png")
