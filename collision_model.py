@@ -1,6 +1,6 @@
 import numpy as np
 
-def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None):
+def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None)-> np.ndarray:
     """
     Generates velocity fluctuations using a binomial collision-based random walk.
     Returns a 1D numpy array of cumulative velocity steps.
@@ -14,3 +14,4 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
     )
     velocity = np.cumsum(steps)
     return velocity
+
