@@ -8,6 +8,8 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
 
     Returns a 1D numpy array of cumulative velocity steps.
     """
+    if not (0.0 <= p_forward <= 1.0):
+        raise ValueError("p_forward must be between 0 and 1")
     if seed is not None:
         np.random.seed(seed)
     steps = np.random.choice(
@@ -17,5 +19,6 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
     )
     velocity = np.cumsum(steps)
     return velocity
+
 
 
