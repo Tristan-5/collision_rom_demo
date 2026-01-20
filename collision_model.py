@@ -10,6 +10,7 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
     """
     if not (0.0 <= p_forward <= 1.0):
         raise ValueError("p_forward must be between 0 and 1")
+    # This implements a biased binomial random walk in velocity space
     if seed is not None:
         np.random.seed(seed)
     steps = np.random.choice(
@@ -19,6 +20,7 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
     )
     velocity = np.cumsum(steps)
     return velocity
+
 
 
 
