@@ -10,7 +10,7 @@ def compute_rom_parameters(velocity):
         raise ValueError("velocity must be in an one-dimensional array")
         
     mean_v = float(np.mean(velocity))
-    var_v  = float(np.var(velocity))
+    var_v  = float(np.var(velocity, ddof=1))
     return mean_v, var_v
 
 def rom_prediction(N, mean_v, var_v):
@@ -21,4 +21,5 @@ def rom_prediction(N, mean_v, var_v):
     t = np.arange(1, N + 1)
     predicted_variance = var_v * (t / t[-1])
     return t, predicted_variance
+
 
