@@ -22,6 +22,8 @@ def rom_prediction(N, mean_v, var_v):
         raise ValueError("N must be a positive integer")
         
     t = np.arange(1, N + 1)
+    
+    # Linear scaling ensures the predicted variance matches var_v at the final time
     predicted_variance = var_v * (t / t[-1])
     return t, predicted_variance
 
