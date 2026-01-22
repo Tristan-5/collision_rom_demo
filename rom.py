@@ -18,8 +18,12 @@ def rom_prediction(N, mean_v, var_v):
     Predict a simple variance growth curve for demonstration.
     Returns t (1..N) and predicted variance array.
     """
+    if N <= 0:
+        raise ValueError("N must be a positive integer")
+        
     t = np.arange(1, N + 1)
     predicted_variance = var_v * (t / t[-1])
     return t, predicted_variance
+
 
 
