@@ -15,14 +15,20 @@ def empirical_variance_series(velocity, start=10):
     t = np.arange(start, len(velocity)+1)
     return t, np.array(empirical)
 
-def main(N=5000, step_size=1.0, p_forward=0.55, seed=None, savefig=True):
+def main(
+    N=DEFAULT_N,
+    step_size=DEFAULT_STEP_SIZE,
+    p_forward=DEFAULT_P_FORWARD,
+    seed=None,
+    savefig=True,
+):
     velocity = generate_collision_velocity(N=N, step_size=step_size, p_forward=p_forward, seed=seed)
     if savefig:
         plot_velocity(velocity, savepath="figures/velocity.png")
     else:
         plot_velocity(velocity, savepath=None)
 
-    t_emp, empirical_var = empirical_variance_series(velocity, start=10)
+    t_emp, empirical_var = empirical_variance_series(velocity, start=DEFAULT_START_VAR)
 
     mean_v, var_v = compute_rom_parameters(velocity)
     t_rom, predicted_var = rom_prediction(len(t_emp), mean_v, var_v)
@@ -45,4 +51,5 @@ if __name__ == "__main__":
     parser.add_argument("--no-save", dest="save", action="store_false", help="Do not save figures")
     args = parser.parse_args()
     main(N=args.N, step_size=args.step, p_forward=args.p, seed=args.seed, savefig=args.save)
+
 
