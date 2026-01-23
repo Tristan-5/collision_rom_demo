@@ -5,6 +5,11 @@ from rom import compute_rom_parameters, rom_prediction
 from plots import plot_velocity, plot_variance_comparison
 import os
 
+DEFAULT_N = 5000
+DEFAULT_STEP_SIZE = 1.0
+DEFAULT_P_FORWARD = 0.55
+DEFAULT_START_VAR = 10
+
 def empirical_variance_series(velocity, start=10):
     empirical = [np.var(velocity[:i]) for i in range(start, len(velocity)+1)]
     t = np.arange(start, len(velocity)+1)
@@ -40,3 +45,4 @@ if __name__ == "__main__":
     parser.add_argument("--no-save", dest="save", action="store_false", help="Do not save figures")
     args = parser.parse_args()
     main(N=args.N, step_size=args.step, p_forward=args.p, seed=args.seed, savefig=args.save)
+
