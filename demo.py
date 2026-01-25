@@ -14,6 +14,11 @@ def empirical_variance_series(
     velocity: np.ndarray,
     start: int = DEFAULT_START_VAR,
 ) -> tuple[np.ndarray, np.ndarray]:
+    """
+    compute the empirical variance of the velocity signal as a function of sample size.
+
+    The variance index i is computed using teh prefix velocity[:i], mimiking cumulative sampling in time.
+    """
     empirical = [np.var(velocity[:i]) for i in range(start, len(velocity)+1)]
     t = np.arange(start, len(velocity)+1)
     return t, np.array(empirical)
@@ -54,6 +59,7 @@ if __name__ == "__main__":
     parser.add_argument("--no-save", dest="save", action="store_false", help="Do not save figures")
     args = parser.parse_args()
     main(N=args.N, step_size=args.step, p_forward=args.p, seed=args.seed, savefig=args.save)
+
 
 
 
