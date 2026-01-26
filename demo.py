@@ -37,7 +37,8 @@ def main(
         plot_velocity(velocity, savepath=None)
 
     t_emp, empirical_var = empirical_variance_series(velocity, start=DEFAULT_START_VAR)
-
+    assert len(t_emp) == len(empirical_var), "Empirical variance time series length mismatch"
+    
     mean_v, var_v = compute_rom_parameters(velocity)
     t_rom, predicted_var = rom_prediction(len(t_emp), mean_v, var_v)
 
@@ -59,6 +60,7 @@ if __name__ == "__main__":
     parser.add_argument("--no-save", dest="save", action="store_false", help="Do not save figures")
     args = parser.parse_args()
     main(N=args.N, step_size=args.step, p_forward=args.p, seed=args.seed, savefig=args.save)
+
 
 
 
