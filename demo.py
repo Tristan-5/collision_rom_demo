@@ -27,6 +27,7 @@ def main(
     N=DEFAULT_N,
     step_size=DEFAULT_STEP_SIZE,
     p_forward=DEFAULT_P_FORWARD,
+    start_vaar=DEFAULT_START_VAR,
     seed=None,
     savefig=True,
 ):
@@ -36,7 +37,7 @@ def main(
     else:
         plot_velocity(velocity, savepath=None)
 
-    t_emp, empirical_var = empirical_variance_series(velocity, start=DEFAULT_START_VAR)
+    t_emp, empirical_var = empirical_variance_series(velocity, start=start_var)
     assert len(t_emp) == len(empirical_var), "Empirical variance time series length mismatch"
     
     mean_v, var_v = compute_rom_parameters(velocity)
@@ -53,13 +54,21 @@ def main(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Collision-ROM demo")
+    parser.add_argument("--start-var", type=int, default=DEFAULT_START_VAR)
     parser.add_argument("--N", type=int, default=5000)
     parser.add_argument("--step", type=float, default=1.0)
     parser.add_argument("--p", type=float, default=0.55)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--no-save", dest="save", action="store_false", help="Do not save figures")
     args = parser.parse_args()
-    main(N=args.N, step_size=args.step, p_forward=args.p, seed=args.seed, savefig=args.save)
+    main(
+        N=args.N, 
+        step_size=args.step, 
+        p_forward=args.p, 
+        seed=args.seed, 
+        savefig=args.save
+    )
+
 
 
 
