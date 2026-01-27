@@ -1,9 +1,13 @@
 import numpy as np
 
-def compute_rom_parameters(velocity):
+def compute_rom_parameters(velocity: np.ndarray) -> tuple[float, float]:
     """
-    Compute simple ROM parameters from velocity signal.
-    Returns mean and variance (scalars).
+    Compute ROM parameters from a velocity signal.
+    Returns
+    mean_v : float
+        (mean of the velocity signal)
+    var_v : float
+        (variance of the velocity signal)
     """
     velocity=np.asarray(velocity)
     if velocity.ndim !=1:
@@ -27,6 +31,7 @@ def rom_prediction(N, mean_v, var_v):
     predicted_variance = var_v * (t_rom / t_rom[-1])
     
     return t_rom, predicted_variance
+
 
 
 
