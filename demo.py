@@ -31,6 +31,11 @@ def main(
     seed=None,
     savefig=True,
 ):
+    """
+    Run a collision based random walk simulation and compare the empirical variance growth against a ROM prediction.
+    This script is intended as a minimal demo rather than a calibrated physical model.
+    """
+    
     velocity = generate_collision_velocity(N=N, step_size=step_size, p_forward=p_forward, seed=seed)
     if savefig:
         plot_velocity(velocity, savepath="figures/velocity.png")
@@ -68,6 +73,7 @@ if __name__ == "__main__":
         seed=args.seed, 
         savefig=args.save
     )
+
 
 
 
