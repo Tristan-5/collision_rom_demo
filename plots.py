@@ -24,8 +24,9 @@ def plot_variance_comparison(t_emp, empirical_var, t_rom, predicted_var, savepat
     plt.plot(t_emp, empirical_var, label="Empirical variance")
     plt.plot(t_rom, predicted_var, linestyle="--", label="ROM prediction")
     plt.xlabel("Collision events")
-    plt.ylabel("Variance")
+    plt.ylabel("Velocity Variance")
     plt.legend()
+    plt.grid(True, alpha=0.3)
     plt.title("ROM vs empirical variance growth")
     plt.tight_layout()
     if savepath:
@@ -34,3 +35,4 @@ def plot_variance_comparison(t_emp, empirical_var, t_rom, predicted_var, savepat
         print(f"Saved {savepath}")
     plt.show()
     plt.close()
+
