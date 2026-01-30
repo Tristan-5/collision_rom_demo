@@ -24,6 +24,8 @@ def empirical_variance_series(
     return t, np.array(empirical)
 
 def main(
+    if savefig:
+        os.makedirs("figures", exist_ok=True)
     N=DEFAULT_N,
     step_size=DEFAULT_STEP_SIZE,
     p_forward=DEFAULT_P_FORWARD,
@@ -73,6 +75,7 @@ if __name__ == "__main__":
         seed=args.seed, 
         savefig=args.save
     )
+
 
 
 
