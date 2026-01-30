@@ -1,5 +1,19 @@
 import numpy as np
 
+def generate_collision_steps(
+    N: int,
+    step_size: float,
+    p_forward: float,
+) -> np.ndarray:
+    """
+    Generate discrete collision steps for random walk
+    """
+    return np.random.choice(
+        [-step_size, step_size],
+        size=N
+        p=[1 - p_forward, p_forward],
+)
+
 def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None)-> np.ndarray:
     """
     Generates velocity fluctuations using a binomial collision-based random walk.
@@ -20,6 +34,7 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
     )
     velocity = np.cumsum(steps)
     return velocity
+
 
 
 
