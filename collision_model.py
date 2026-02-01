@@ -27,13 +27,10 @@ def generate_collision_velocity(N=10000, step_size=1.0, p_forward=0.5, seed=None
     # This implements a biased binomial random walk in velocity space
     if seed is not None:
         np.random.seed(seed)
-    steps = np.random.choice(
-        [-step_size, step_size],
-        size=N,
-        p=[1 - p_forward, p_forward]
-    )
+    steps = generate_collision_steps(N, step_size, p_forward)
     velocity = np.cumsum(steps)
     return velocity
+
 
 
 
