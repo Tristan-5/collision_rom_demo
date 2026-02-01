@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy
 import os
 
+DEFAULT_FIG_DPI = 150
+
 def ensure_dir(path):
     os.makedirs(path, exist_ok=True)
 
@@ -14,7 +16,7 @@ def plot_velocity(velocity, savepath=None):
     plt.tight_layout()
     if savepath:
         ensure_dir(os.path.dirname(savepath))
-        plt.savefig(savepath, dpi=150)
+        plt.savefig(savepath, dpi=DEFAULT_FIG_DPI)
         print(f"Saved {savepath}")
     plt.show()
     plt.close()
@@ -31,8 +33,9 @@ def plot_variance_comparison(t_emp, empirical_var, t_rom, predicted_var, savepat
     plt.tight_layout()
     if savepath:
         ensure_dir(os.path.dirname(savepath))
-        plt.savefig(savepath, dpi=150)
+        plt.savefig(savepath, dpi=DEFAULT_FIG_DPI)
         print(f"Saved {savepath}")
     plt.show()
     plt.close()
+
 
