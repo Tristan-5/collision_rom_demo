@@ -46,6 +46,9 @@ def main(
 
     t_emp, empirical_var = empirical_variance_series(velocity, start=start_var)
     assert len(t_emp) == len(empirical_var), "Empirical variance time series length mismatch"
+
+    if empirical_var[-1] <= 0:
+        raise RuntimeError("Final empirical variance must be positive")
     
     mean_v, var_v = compute_rom_parameters(velocity)
     t_rom, predicted_var = rom_prediction(len(t_emp), mean_v, var_v)
@@ -75,6 +78,7 @@ if __name__ == "__main__":
         seed=args.seed, 
         savefig=args.save
     )
+
 
 
 
