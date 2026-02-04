@@ -60,7 +60,7 @@ def main(
 
     print("ROM parameters:")
     print(f"  mean = {mean_v:.4f}, variance = {var_v:.4f}")
-    print("Tip: re-run with different p_forward to see predictable changes in variance scaling.")
+    print("Tip: re-run with different p_forward to observe predictable changes in variance scaling with collision bias.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Collision-ROM demo")
@@ -78,6 +78,7 @@ if __name__ == "__main__":
         seed=args.seed, 
         savefig=args.save
     )
+
 
 
 
