@@ -8,7 +8,7 @@ See https://doi.org/10.48550/arXiv.2601.03279 (to be published in Transport Phen
 
 ## Reproducibility
 
-All stochastic components support explicit random seeding.Providing a fixed seed ensures deterministic and reproducible results across runs and platforms (subject to NumPy version consistency).
+All stochastic components support explicit random seeding. Providing a fixed seed ensures deterministic and reproducible results across runs and platforms (subject to NumPy version consistency).
 
 Overview:
 - `collision_model.py`: Generates velocity fluctuations from a binomial collision-event random walk
@@ -20,3 +20,4 @@ Usage:
 Run the demo script from the command line to simulate a sequence of collision events:
 ```bash
 py demo.py --N 5000 --p 0.55 --seed 1
+
