@@ -7,7 +7,7 @@ DEFAULT_FIG_DPI = 150
 def ensure_dir(path):
     os.makedirs(path, exist_ok=True)
 
-def plot_velocity(velocity, savepath=None):
+def plot_velocity(velocity: np.ndarray, savepath: str | None = None) -> None:
     plt.figure(figsize=(8,3.5))
     plt.plot(velocity, alpha=0.8)
     plt.xlabel("Collision events")
@@ -37,5 +37,6 @@ def plot_variance_comparison(t_emp, empirical_var, t_rom, predicted_var, savepat
         print(f"Saved {savepath}")
     plt.show()
     plt.close()
+
 
 
