@@ -21,7 +21,13 @@ def plot_velocity(velocity: np.ndarray, savepath: str | None = None) -> None:
     plt.show()
     plt.close()
 
-def plot_variance_comparison(t_emp, empirical_var, t_rom, predicted_var, savepath=None):
+def plot_variance_comparison(
+    t_emp: np.ndarray,
+    empirical_var: np.ndarray,
+    t_rom: np.ndarray,
+    predicted_var: np.ndarray,
+    savepath: str | None=None,
+) -> None:
     plt.figure(figsize=(6,4))
     plt.plot(t_emp, empirical_var, label="Empirical variance")
     plt.plot(t_rom, predicted_var, linestyle="--", label="ROM prediction")
@@ -37,6 +43,7 @@ def plot_variance_comparison(t_emp, empirical_var, t_rom, predicted_var, savepat
         print(f"Saved {savepath}")
     plt.show()
     plt.close()
+
 
 
 
