@@ -14,7 +14,7 @@ https://doi.org/10.1515/tp-2026-0017
 Clone the repository and install the required dependencies:
 ```bash
 pip install numpy matplotlib
-
+```
 
 ## Reproducibility
 
@@ -36,6 +36,7 @@ Run the demo script from the command line
 
 ```bash
 py demo.py --N 5000 --p 0.55 --seed 1
+
 
 
 
