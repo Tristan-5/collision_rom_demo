@@ -36,7 +36,4 @@ Run the demo script from the command line
 
 ```bash
 py demo.py --N 5000 --p 0.55 --seed 1
-
-
-
-
+```
