@@ -54,5 +54,8 @@ python demo.py --N 5000 --p 0.55 --seed 1
 Parameters:
 
 `N`--number of collision events
+
 `p`--collision asymettry probability
+
 `seed`--random seed for reproducibility
+
