@@ -1,14 +1,18 @@
 import matplotlib.pyplot as plt
-import numpy
+import numpy as np
 import os
 
 DEFAULT_FIG_DPI = 150
 
-def ensure_dir(path):
-    os.makedirs(path, exist_ok=True)
+def ensure_dir(path: str) -> None:
+    if path:
+        os.makedirs(path, exist_ok=True)
 
-def plot_velocity(velocity: np.ndarray, savepath: str | None = None) -> None:
-    plt.figure(figsize=(8,3.5))
+def plot_velocity(
+    velocity: np.ndarray, 
+    savepath: str | None = None
+) -> None:
+    plt.figure(figsize=(8, 3.5))
     plt.plot(velocity, alpha=0.8)
     plt.xlabel("Collision events")
     plt.ylabel("Cumulative velocity")
@@ -28,11 +32,11 @@ def plot_variance_comparison(
     predicted_var: np.ndarray,
     savepath: str | None=None,
 ) -> None:
-    plt.figure(figsize=(6,4))
+    plt.figure(figsize=(6, 4))
     plt.plot(t_emp, empirical_var, label="Empirical variance")
     plt.plot(t_rom, predicted_var, linestyle="--", label="ROM prediction")
     plt.xlabel("Collision events")
-    plt.ylabel("Velocity Variance")
+    plt.ylabel("Velocity variance")
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.title("ROM vs empirical variance growth")
@@ -43,6 +47,7 @@ def plot_variance_comparison(
         print(f"Saved {savepath}")
     plt.show()
     plt.close()
+
 
 
 
