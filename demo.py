@@ -59,7 +59,7 @@ def main(
         p_forward=p_forward,
         seed=seed,
     )
-plot_velocity(
+    plot_velocity(
         velocity,
         savepath="figures/velocity.png" if savefig else None,
     )
@@ -119,6 +119,7 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
 
 
 
