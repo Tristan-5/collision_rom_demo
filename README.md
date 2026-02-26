@@ -18,6 +18,14 @@ This is not a CFD solver and does not attempt to resolve spatial flow structures
 
 ---
 
+## Experiments
+
+The `experiments/` folder contains exploratory prototypes and learning material that are not part of the production CS ROM implementation.
+
+These files are used for internal exploration and model development and should be considered experimental.
+
+They are not required for reproduction of the published ROM results.
+
 ## Installation
 
 Clone the repository and install dependencies:
@@ -58,4 +66,5 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
 
