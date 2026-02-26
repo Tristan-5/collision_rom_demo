@@ -18,12 +18,6 @@ This is not a CFD solver and does not attempt to resolve spatial flow structures
 
 ---
 
-## Experiments
-
-The `experiments/` folder contains exploratory prototypes and learning material that are not part of the production CS ROM implementation.
-
-These files are used for internal exploration and model development and should be considered experimental.
-
 ## Installation
 
 Clone the repository and install dependencies:
@@ -37,6 +31,8 @@ pip install numpy matplotlib
 All stochastic components accept explicit random seeds. Providing a fixed seed ensures deterministic ensemble behaviour (subject to Numpy version consistency).
 
 ## Repository Structure
+
+The main code is contained in the folder 'stochastic/'. The `experiments/` folder contains exploratory prototypes and learning material that are not part of the production CS ROM implementation. 
 
 `collision_model.py` 
 Generates velocity increments via a binomial collision-event random walk.
@@ -64,6 +60,7 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
 
 
 
