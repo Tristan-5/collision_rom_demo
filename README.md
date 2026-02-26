@@ -32,7 +32,7 @@ All stochastic components accept explicit random seeds. Providing a fixed seed e
 
 ## Repository Structure
 
-The main code is contained in the folder 'stochastic/'. The `experiments/` folder contains exploratory prototypes and learning material that are not part of the production CS ROM implementation. 
+The main code is contained in the folder `stochastic/`. The `experiments/` folder contains exploratory prototypes and learning material that are not part of the production CS ROM implementation. 
 
 `collision_model.py` 
 Generates velocity increments via a binomial collision-event random walk.
@@ -60,6 +60,7 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
 
 
 
