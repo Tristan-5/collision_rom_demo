@@ -24,8 +24,6 @@ The `experiments/` folder contains exploratory prototypes and learning material 
 
 These files are used for internal exploration and model development and should be considered experimental.
 
-They are not required for reproduction of the published ROM results.
-
 ## Installation
 
 Clone the repository and install dependencies:
@@ -66,5 +64,6 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
 
 
