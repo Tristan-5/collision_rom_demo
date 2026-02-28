@@ -49,3 +49,25 @@ def generate_collision_velocity(
     velocity = np.cumsum(steps)
     return velocity
 
+def step_variance(step_size: float, p_forward: float) -> float:
+    """
+    Compute the variance contributed by a single collision step.
+    Derived analytically from binomial statistics:
+    Var(step)=4*p_forward*(1-p_forward)*step_size^2
+    This is the microscopic variance that parameterizes the reduced-order stochastic model.
+
+    Parameters
+    ------
+    step_size: float
+        Magnitude of the velocity increment.
+    p_forward: float
+        Probability of a positive step.
+
+    Returns
+    ------
+    float
+        Variance per collision step.
+    """
+    if not (0.0 <= p_forward <= 1):
+        raise ValueError("p_forward must be between 0 and 1")
+    return 4.0 * p_forward * (1.0 - p_forward) * (step_size ** 2)
