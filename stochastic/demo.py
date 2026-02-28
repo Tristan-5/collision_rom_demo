@@ -2,8 +2,8 @@ import numpy as np
 import argparse
 import os
 
-from collision_model import generate_collision_velocity
-from rom import compute_rom_parameters, rom_prediction
+from collision_model import generate_collision_velocity, step_variance
+from rom import compute_rom_parameters, rom_prediction_physics
 from plots import plot_velocity, plot_variance_comparison
 
 DEFAULT_N = 5000
@@ -77,8 +77,10 @@ def main(
 
     mean_v, var_v = compute_rom_parameters(velocity)
 
-    t_rom, predicted_var = rom_prediction(len(t_emp), var_v)
+    sigma2 = step_variance(step_size, p_forward)
 
+    t_rom, predicted_var = rom_prediction_physics(len(t_emp), sigma2)
+    
     plot_variance_comparison(
         t_emp,
         empirical_var,
@@ -88,7 +90,10 @@ def main(
     )
 
     print("ROM parameters:")
-    print(f"  mean = {mean_v:.4f}, variance = {var_v:.4f}")
+    print(f"  mean (empirical) = {mean_v:.4f}")
+    print(f"  empirical variance (final) = {var_v:.4f}")
+    print(f"  physics-derived step variance = {sigma2:.4f}")
+    print(f"  predicted final variance (theory) = {sigma2 * len(t_emp):.4f}")
     print(
         "Tip: re-run with different p_forward to observe "
         "predictable changes in variance scaling with collision bias."
@@ -119,6 +124,7 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
 
 
 
