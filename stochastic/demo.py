@@ -10,36 +10,47 @@ DEFAULT_N = 5000
 DEFAULT_STEP_SIZE = 1.0
 DEFAULT_P_FORWARD = 0.55
 DEFAULT_START_VAR = 10
+DEFAULT_M = 200
 
-def empirical_variance_series(
-    velocity: np.ndarray,
-    start: int = DEFAULT_START_VAR,
+def ensemble_variance_series(
+    N: int,
+    M: int,
+    step_size: float,
+    p_forward: float,
 ) -> tuple[np.ndarray, np.ndarray]:
     """
-    Compute the empirical variance of the velocity signal as a function of sample size.
+    Compute ensemble variance across M independent realizations.
 
-    The variance at index i is computed using the prefix velocity[:i],
-    mimicking cumulative sampling in time.
+    Returns
+    -------
+    t : ndarray
+        Time index (1..N)
+    var_ensemble : ndarray
+        Variance across realizations at each time step.
     """
-    velocity = np.asarray(velocity)
+    all_velocities = []
 
-    if start < 2:
-        raise ValueError("start must be >= 2")
-    if start > velocity.size:
-        raise ValueError("start must not exceed velocity length")
+    for m in range(M):
+        v = generate_collision_velocity(
+            N=N,
+            step_size=step_size,
+            p_forward=p_forward,
+            seed=None,
+        )
+        all_velocities.append(v)
 
-    empirical = [
-        np.var(velocity[:i], ddof=1)
-        for i in range(start, velocity.size + 1)
-    ]
-    t = np.arange(start, velocity.size +1)
-    return t, np.array(empirical)
+    V = np.array(all_velocities)  # shape (M, N)
+
+    var_ensemble = np.var(V, axis=0, ddof=1)
+    t = np.arange(1, N + 1)
+
+    return t, var_ensemble
 
 def main(
     N=DEFAULT_N,
+    M=DEFAULT_M,
     step_size=DEFAULT_STEP_SIZE,
     p_forward=DEFAULT_P_FORWARD,
-    start_var=DEFAULT_START_VAR,
     seed=None,
     savefig=True,
 ):
@@ -64,22 +75,18 @@ def main(
         savepath="figures/velocity.png" if savefig else None,
     )
 
-    t_emp, empirical_var = empirical_variance_series(
-        velocity,
-        start=start_var,
+    t_emp, empirical_var = ensemble_variance_series(
+        N=N,
+        M=M,
+        step_size=step_size,
+        p_forward=p_forward,
     )
-
-    if len(t_emp) != len(empirical_var):
-        raise RuntimeError("Empirical variance time series length mismatch")
-
-    if empirical_var[-1] <= 0:
-        raise RuntimeError("Final empirical variance must be positive")
-
+    
     mean_v, var_v = compute_rom_parameters(velocity)
 
     sigma2 = step_variance(step_size, p_forward)
 
-    t_rom, predicted_var = rom_prediction_physics(len(t_emp), sigma2)
+    t_rom, predicted_var = rom_prediction_physics(N, sigma2)
     
     plot_variance_comparison(
         t_emp,
@@ -90,19 +97,15 @@ def main(
     )
 
     print("ROM parameters:")
-    print(f"  mean (empirical) = {mean_v:.4f}")
-    print(f"  empirical variance (final) = {var_v:.4f}")
+    print(f"  ensemble realizations (M) = {M}")
     print(f"  physics-derived step variance = {sigma2:.4f}")
-    print(f"  predicted final variance (theory) = {sigma2 * len(t_emp):.4f}")
-    print(
-        "Tip: re-run with different p_forward to observe "
-        "predictable changes in variance scaling with collision bias."
-    )
+    print(f"  predicted final variance (theory) = {sigma2 * N:.4f}")
+    print(f"  empirical final variance (ensemble) = {empirical_var[-1]:.4f}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Collision-ROM demo")
-    parser.add_argument("--start-var", type=int, default=DEFAULT_START_VAR)
+    parser.add_argument("--M", type=int, default=DEFAULT_M)
     parser.add_argument("--N", type=int, default=DEFAULT_N)
     parser.add_argument("--step", type=float, default=DEFAULT_STEP_SIZE)
     parser.add_argument("--p", type=float, default=DEFAULT_P_FORWARD)
@@ -118,14 +121,9 @@ if __name__ == "__main__":
 
     main(
         N=args.N,
+        M=args.M,
         step_size=args.step,
         p_forward=args.p,
-        start_var=args.start_var,
         seed=args.seed,
         savefig=args.save,
     )
-
-
-
-
-
