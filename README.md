@@ -35,14 +35,7 @@ Install dependencies:
 
 ```bash
 pip install numpy matplotlib
-## Installation
-
-Clone the repository and install dependencies:
-
-```bash
-pip install numpy matplotlib
 ```
-
 ## Reproducibility
 
 All stochastic components accept explicit random seeds. Providing a fixed seed ensures deterministic ensemble behaviour (subject to Numpy version consistency).
@@ -79,4 +72,5 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
 
