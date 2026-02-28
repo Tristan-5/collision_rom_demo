@@ -4,15 +4,15 @@ This repository contains a Python implementation of a collision-statistical redu
 
 The model uses a binomial random-walk representation of molecular collision events, consistent with classical statistical mechanics of diffusion. Ensemble statistics are compared against analytical predictions derived from step variance:
 
-\[
+$$
 \sigma^2 = 4 p (1-p) \Delta v^2
-\]
+$$
 
 and ensemble variance growth:
 
-\[
+$$
 Var[v_N] = N \sigma^2
-\]
+$$
 
 For background on the collision-statistical framework, see:
 
@@ -79,3 +79,4 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
