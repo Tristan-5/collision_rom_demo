@@ -102,6 +102,17 @@ def main(
     print(f"  predicted final variance (theory) = {sigma2 * N:.4f}")
     print(f"  empirical final variance (ensemble) = {empirical_var[-1]:.4f}")
 
+    rel_error = abs(empirical_var[-1] - sigma2 * N) / (sigma2 * N)
+    
+    print(f"  relative error = {100 * rel_error:.3f}%")
+    
+    slope = np.polyfit(t_emp, empirical_var, 1)[0]
+    D_empirical = slope / 2.0
+    D_theory = sigma2 / 2.0
+    
+    print(f"  theoretical diffusion coefficient D = {D_theory:.4f}")
+    print(f"  empirical diffusion coefficient D = {D_empirical:.4f}")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Collision-ROM demo")
@@ -127,3 +138,4 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
