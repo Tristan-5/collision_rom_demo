@@ -51,7 +51,7 @@ def convergence_study(
     M_values: list[int],
     step_size: float,
     p_forward: float,
-    trials: int = 5,
+    trials: int = 20,
 ) -> tuple[np.ndarray, np.ndarray]:
 
     sigma2 = step_variance(step_size, p_forward)
@@ -192,6 +192,7 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
 
 
 
