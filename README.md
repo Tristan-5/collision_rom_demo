@@ -2,17 +2,20 @@
 
 This repository contains a Python implementation of a collision-statistical reduced-order model (CS ROM) for velocity fluctuation and diffusion-like variance growth.
 
-The model uses a binomial random-walk representation of molecular collision events, consistent with classical statistical mechanics of diffusion. Ensemble statistics are compared against analytical predictions derived from step variance:
+The model uses a binomial random-walk representation of molecular collision events, consistent with classical statistical mechanics of diffusion. The variance computed by individual collision steps is derived analytically,
 
 $$
 \sigma^2 = 4 p (1-p) \Delta v^2
 $$
 
-and ensemble variance growth:
+and is used to parameterize a reduced-order stochastic model without empirical tuning.
+
+Ensemble simulations are compared directly against the analytical diffusion prediction,
 
 $$
 Var[v_N] = N \sigma^2
 $$
+and the expected Monte Carlo convergence behaviour (relative error $\sim M^{-1/2}$) is verified numerically. 
 
 For background on the collision-statistical framework, see:
 
@@ -21,9 +24,9 @@ https://doi.org/10.1515/tp-2026-0017
 Rather than resolving spatial flow fields or turbulence dynamics, the approach demonstrates:
 
 - How microscopic collision statistics produce diffusion-like variance growth  
-- How ensemble statistics align with analytic predictions  
-- A low-dimensional surrogate for transport processes  
-- Foundations of stochastic reduced-order modeling
+- How ensemble statistics align with analytic transport predictions 
+- Recovery of the diffusion coefficient from simulation data
+- Foundations of physics-parameterized stochastic reduced-order modeling
 
 This implementation is intentionally lightweight. It does not resolve Navier–Stokes fields or turbulent cascades.
 
@@ -72,5 +75,6 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
 
 
