@@ -69,3 +69,25 @@ def plot_loglog_variance(
 
     plt.show()
     plt.close()
+
+def plot_convergence(
+    M_values: np.ndarray,
+    errors: np.ndarray,
+    savepath: str | None = None,
+) -> None:
+
+    plt.figure(figsize=(6, 4))
+    plt.loglog(M_values, errors)
+    plt.xlabel("Ensemble size (M)")
+    plt.ylabel("Relative error")
+    plt.title("Ensemble convergence study")
+    plt.grid(True, which="both", alpha=0.3)
+    plt.tight_layout()
+
+    if savepath:
+        ensure_dir(os.path.dirname(savepath))
+        plt.savefig(savepath, dpi=DEFAULT_FIG_DPI)
+        print(f"Saved {savepath}")
+
+    plt.show()
+    plt.close()
