@@ -15,6 +15,7 @@ Ensemble simulations are compared directly against the analytical diffusion pred
 $$
 Var[v_N] = N \sigma^2
 $$
+
 and the expected Monte Carlo convergence behaviour (relative error $\sim M^{-1/2}$) is verified numerically. 
 
 For background on the collision-statistical framework, see:
@@ -75,6 +76,7 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
 
 
 
