@@ -48,7 +48,24 @@ def plot_variance_comparison(
     plt.show()
     plt.close()
 
+def plot_loglog_variance(
+    t: np.ndarray,
+    variance: np.ndarray,
+    savepath: str | None = None,
+) -> None:
 
+    plt.figure(figsize=(6, 4))
+    plt.loglog(t, variance)
+    plt.xlabel("Collision events")
+    plt.ylabel("Velocity variance")
+    plt.title("Log–log variance scaling")
+    plt.grid(True, which="both", alpha=0.3)
+    plt.tight_layout()
 
+    if savepath:
+        ensure_dir(os.path.dirname(savepath))
+        plt.savefig(savepath, dpi=DEFAULT_FIG_DPI)
+        print(f"Saved {savepath}")
 
-
+    plt.show()
+    plt.close()
