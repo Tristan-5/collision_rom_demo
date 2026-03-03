@@ -51,6 +51,7 @@ def convergence_study(
     M_values: list[int],
     step_size: float,
     p_forward: float,
+    trials: int = 5,
 ) -> tuple[np.ndarray, np.ndarray]:
 
     sigma2 = step_variance(step_size, p_forward)
@@ -59,14 +60,22 @@ def convergence_study(
     errors = []
 
     for M in M_values:
-        _, var_emp = ensemble_variance_series(
-            N=N,
-            M=M,
-            step_size=step_size,
-            p_forward=p_forward,
-        )
-        rel_error = abs(var_emp[-1] - true_var) / true_var
-        errors.append(rel_error)
+
+        trial_errors = []
+
+        for _ in range(trials):
+
+            _, var_emp = ensemble_variance_series(
+                N=N,
+                M=M,
+                step_size=step_size,
+                p_forward=p_forward,
+            )
+
+            rel_error = abs(var_emp[-1] - true_var) / true_var
+            trial_errors.append(rel_error)
+
+        errors.append(np.mean(trial_errors))
 
     return np.array(M_values), np.array(errors)
 
@@ -183,6 +192,7 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
 
 
 
