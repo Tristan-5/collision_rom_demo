@@ -78,6 +78,9 @@ def plot_convergence(
 
     plt.figure(figsize=(6, 4))
     plt.loglog(M_values, errors)
+    ref = errors[0] * (M_values / M_values[0])**(-0.5)
+    plt.loglog(M_values, ref, linestyle="--", label="M^{-1/2} reference")
+    plt.legend()
     plt.xlabel("Ensemble size (M)")
     plt.ylabel("Relative error")
     plt.title("Ensemble convergence study")
@@ -91,3 +94,4 @@ def plot_convergence(
 
     plt.show()
     plt.close()
+
