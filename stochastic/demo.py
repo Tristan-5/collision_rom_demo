@@ -4,7 +4,7 @@ import os
 
 from collision_model import generate_collision_velocity, step_variance
 from rom import compute_rom_parameters, rom_prediction_physics
-from plots import plot_velocity, plot_variance_comparison, plot_loglog_variance
+from plots import plot_velocity, plot_variance_comparison, plot_loglog_variance, plot_convergence
 
 DEFAULT_N = 5000
 DEFAULT_STEP_SIZE = 1.0
@@ -126,6 +126,20 @@ def main(
         empirical_var,
         savepath="figures/variance_loglog.png" if savefig else None,
     )
+
+    M_values = [20, 50, 100, 200, 400]
+    M_vals, errors = convergence_study(
+        N=N,
+        M_values=M_values,
+        step_size=step_size,
+        p_forward=p_forward,
+    )
+
+    plot_convergence(
+        M_vals,
+        errors,
+        savepath="figures/convergence.png" if savefig else None,
+    )
     
     print("ROM parameters:")
     print(f"  ensemble realizations (M) = {M}")
@@ -169,6 +183,7 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
 
 
 
