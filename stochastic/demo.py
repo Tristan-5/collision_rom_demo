@@ -46,6 +46,31 @@ def ensemble_variance_series(
 
     return t, var_ensemble
 
+def convergence_study(
+    N: int,
+    M_values: list[int],
+    step_size: float,
+    p_forward: float,
+) -> tuple[np.ndarray, np.ndarray]:
+
+    sigma2 = step_variance(step_size, p_forward)
+    true_var = sigma2 * N
+
+    errors = []
+
+    for M in M_values:
+        _, var_emp = ensemble_variance_series(
+            N=N,
+            M=M,
+            step_size=step_size,
+            p_forward=p_forward,
+        )
+        rel_error = abs(var_emp[-1] - true_var) / true_var
+        errors.append(rel_error)
+
+    return np.array(M_values), np.array(errors)
+
+
 def main(
     N=DEFAULT_N,
     M=DEFAULT_M,
@@ -144,5 +169,6 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
 
 
