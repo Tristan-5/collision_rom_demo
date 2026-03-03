@@ -4,7 +4,7 @@ import os
 
 from collision_model import generate_collision_velocity, step_variance
 from rom import compute_rom_parameters, rom_prediction_physics
-from plots import plot_velocity, plot_variance_comparison
+from plots import plot_velocity, plot_variance_comparison, plot_loglog_variance
 
 DEFAULT_N = 5000
 DEFAULT_STEP_SIZE = 1.0
@@ -96,6 +96,12 @@ def main(
         savepath="figures/variance_compare.png" if savefig else None,
     )
 
+    plot_loglog_variance(
+        t_emp,
+        empirical_var,
+        savepath="figures/variance_loglog.png" if savefig else None,
+    )
+    
     print("ROM parameters:")
     print(f"  ensemble realizations (M) = {M}")
     print(f"  physics-derived step variance = {sigma2:.4f}")
@@ -138,4 +144,5 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
+
 
