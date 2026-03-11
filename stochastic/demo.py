@@ -79,7 +79,6 @@ def convergence_study(
 
     return np.array(M_values), np.array(errors)
 
-
 def main(
     N=DEFAULT_N,
     M=DEFAULT_M,
@@ -167,7 +166,6 @@ def main(
     print(f"  theoretical diffusion coefficient D = {D_theory:.4f}")
     print(f"  empirical diffusion coefficient D = {D_empirical:.4f}")
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Collision-ROM demo")
     parser.add_argument("--M", type=int, default=DEFAULT_M)
@@ -192,9 +190,3 @@ if __name__ == "__main__":
         seed=args.seed,
         savefig=args.save,
     )
-
-
-
-
-
-
