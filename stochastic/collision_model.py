@@ -12,7 +12,7 @@ def generate_collision_steps(
     Returns
     ------
     ndarray
-        Array of length N containing values $\pm$ step_size.
+        Array of length N containing values +- step_size.
     """
     if not (0.0 <= p_forward <= 1):
         raise ValueError("p_forward must be between 0 and 1")
@@ -71,3 +71,4 @@ def step_variance(step_size: float, p_forward: float) -> float:
     if not (0.0 <= p_forward <= 1):
         raise ValueError("p_forward must be between 0 and 1")
     return 4.0 * p_forward * (1.0 - p_forward) * (step_size ** 2)
+
