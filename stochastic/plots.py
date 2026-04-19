@@ -94,4 +94,3 @@ def plot_convergence(
 
     plt.show()
     plt.close()
-
