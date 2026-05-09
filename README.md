@@ -40,6 +40,7 @@ Install dependencies:
 ```bash
 pip install numpy matplotlib
 ```
+
 ## Reproducibility
 
 All stochastic components accept explicit random seeds. Providing a fixed seed ensures deterministic ensemble behaviour (subject to Numpy version consistency).
@@ -76,6 +77,10 @@ Parameters:
 `p`--collision asymettry probability
 
 `seed`--random seed for reproducibility
+
+## Cascade Folder
+
+This folder extends the stochastic folder to cover full Cascade dynamics. Still under development.
 
 ## Experimental Folder
 This folder contains code that is still being developed.
